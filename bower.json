@@ -1,0 +1,28 @@
+{
+  "name": "tinyspaces",
+  "description": "Code for the tinyspaces site.",
+  "main": "index.js",
+  "authors": [
+    "Greyson Richey <greysonrichey@gmail.com> (http://synsugarstudio.com/)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "tiny",
+    "spaces"
+  ],
+  "homepage": "tinyspaces.me",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "mustache.js": "^2.2.1",
+    "fetch": "^1.0.0",
+    "es6-promise": "^3.2.1",
+    "moment": "^2.13.0"
+  }
+}

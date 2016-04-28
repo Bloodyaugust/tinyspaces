@@ -1,0 +1,37 @@
+{
+  "name": "tinyspaces",
+  "version": "0.0.0",
+  "description": "Code for the tinyspaces site.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bloodyaugust/tinyspaces.git"
+  },
+  "keywords": [
+    "tiny",
+    "spaces"
+  ],
+  "author": "Greyson Richey <greysonrichey@gmail.com> (http://synsugarstudio.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bloodyaugust/tinyspaces/issues"
+  },
+  "homepage": "https://github.com/Bloodyaugust/tinyspaces#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-express-server": "^0.5.3",
+    "grunt-include-source": "^0.7.1",
+    "grunt-sass": "^1.1.0",
+    "grunt-wiredep": "^3.0.1",
+    "mustache": "^2.2.1"
+  }
+}

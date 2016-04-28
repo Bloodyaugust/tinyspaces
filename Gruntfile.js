@@ -41,7 +41,8 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          args: ['dist']
+          args: ['dist'],
+          background: false
         }
       }
     },
@@ -143,6 +144,22 @@ module.exports = function(grunt) {
             }
           }
         }
+      },
+      dist: {
+        src: [
+          'public/index.html'
+        ],
+        fileTypes: {
+          js: {
+            block: /(([\s\t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+            detect: {
+                js: /'(.*\.js)'/gi
+            },
+            replace: {
+                js: '\'{{filePath}}\','
+            }
+          }
+        }
       }
     }
   });
@@ -194,5 +211,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['no-default']);
   grunt.registerTask('dev', ['express:dev', 'sass:dev', 'jshint', 'includeSource:dev', 'wiredep:dev', 'includeHTMLPartials:dev', 'watch']);
-  grunt.registerTask('dist', ['express:dist', 'clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist']);
+  grunt.registerTask('dist', ['clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist']);
+  grunt.registerTask('dist-serve', ['express:dist']);
 };

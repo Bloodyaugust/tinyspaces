@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 var distMode = (process.argv[2] === 'dist');
-var port = process.env.NODE_HOST_PORT || 8085;
+var port = process.env.PORT || 8085;
 
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

@@ -156,6 +156,11 @@ module.exports = function(grunt) {
         }
       },
       dist: {
+        overrides: {
+          jquery: {
+            main: 'dist/jquery.min.js'
+          }
+        },
         src: [
           'public/index.html'
         ],

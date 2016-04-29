@@ -26,7 +26,7 @@ $(function () {
           img.addClass('show');
 
           rotateImage(imageElement);
-        }, 1000 + Math.random() * 1000);
+        }, 1000);
       })(imageElement);
     }
   };

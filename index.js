@@ -1,3 +1,4 @@
+var compression = require('compression');
 var express = require('express');
 var fetch = require('node-fetch');
 var app = express();
@@ -16,6 +17,7 @@ var allowCrossDomain = function(req, res, next) {
 }
 
 app.use(allowCrossDomain);
+app.use(compression());
 if (distMode) {
   app.use(express.static('public'));
 } else {

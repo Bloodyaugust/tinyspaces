@@ -25,9 +25,25 @@ module.exports = function(grunt) {
         }, {
           cwd: 'app/',
           expand: true,
-          src: ['res/**/*', '!*.{png,jpg,gif}'],
+          src: ['res/**/*', '!*.{png,jpg,gif,map}'],
+          dest: 'public/'
+        }, {
+          cwd: 'app/',
+          expand: true,
+          src: ['favicon.ico'],
           dest: 'public/'
         }]
+      }
+    },
+    cssmin: {
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      dist: {
+        files: {
+          'public/css/main.css': ['public/css/main.css']
+        }
       }
     },
     express: {
@@ -112,6 +128,13 @@ module.exports = function(grunt) {
         },
         files: {
           'public/css/main.css': 'app/styles/sass/main.scss'
+        }
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          'public/js/main.js': ['public/js/main.js']
         }
       }
     },
@@ -213,8 +236,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-include-source');
@@ -227,6 +252,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['no-default']);
   grunt.registerTask('dev', ['express:dev', 'sass:dev', 'jshint', 'includeSource:dev', 'wiredep:dev', 'includeHTMLPartials:dev', 'watch']);
-  grunt.registerTask('dist', ['clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist', 'imagemin:dist']);
+  grunt.registerTask('dist', ['clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist', 'imagemin:dist', 'uglify:dist', 'cssmin:dist']);
   grunt.registerTask('dist-serve', ['express:dist']);
 };

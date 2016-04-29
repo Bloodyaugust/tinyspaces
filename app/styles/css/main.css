@@ -130,6 +130,7 @@ header {
 
 .tiny-space {
   opacity: 0;
+  -webkit-backface-visibility: hidden;
   -webkit-transition: opacity 1s ease;
   -moz-transition: opacity 1s ease;
   -ms-transition: opacity 1s ease;

@@ -28,6 +28,7 @@ header {
 
 .tiny-space {
   opacity: 0;
+  -webkit-backface-visibility: hidden;
   @include transition(opacity 1s ease);
 
   &.show {

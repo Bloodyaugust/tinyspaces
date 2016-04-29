@@ -36,6 +36,7 @@
     "grunt-include-source": "^0.7.1",
     "grunt-sass": "^1.1.0",
     "grunt-wiredep": "^3.0.1",
-    "mustache": "^2.2.1"
+    "mustache": "^2.2.1",
+    "node-fetch": "^1.5.1"
   }
 }

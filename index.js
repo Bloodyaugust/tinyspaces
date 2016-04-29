@@ -1,8 +1,11 @@
 var express = require('express');
+var fetch = require('node-fetch');
 var app = express();
 
 var distMode = (process.argv[2] === 'dist');
 var port = process.env.PORT || 8085;
+
+var tinySpaces = [];
 
 var allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -20,6 +23,43 @@ if (distMode) {
 }
 app.use('/bower_components', express.static('bower_components'));
 
+app.get('/spaces', function (req, res) {
+  res.send(JSON.stringify(tinySpaces));
+});
+
 app.listen(port, function () {
   console.log('Listening on port ' + port + ' in ' + (distMode ? 'dist' : 'dev') + ' mode');
 });
+
+if (distMode) {
+  setInterval(function () {
+    fetch('https://api.imgur.com/3/album/cgr9l', {
+      headers: {
+        Authorization: 'Client-ID 7618d54c4d7628a'
+      }
+    }).then(function (resp) {
+      return resp.json();
+    }).then(function (json) {
+      tinySpaces = [];
+
+      for (var i = 0; i < json.data.images.length; i++) {
+        tinySpaces.push(json.data.images[i].link);
+      }
+    });
+  }, 1000 * 86400);
+} else {
+  fetch('https://api.imgur.com/3/album/cgr9l', {
+    headers: {
+      Authorization: 'Client-ID 7618d54c4d7628a'
+    }
+  }).then(function (resp) {
+    return resp.json();
+  }).then(function (json) {
+    tinySpaces = [];
+
+    for (var i = 0; i < json.data.images.length; i++) {
+
+      tinySpaces.push(json.data.images[i].link);
+    }
+  });
+}

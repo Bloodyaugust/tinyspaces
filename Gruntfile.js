@@ -20,17 +20,12 @@ module.exports = function(grunt) {
         files: [{
           cwd: 'app/',
           expand: true,
-          src: ['res/*'],
-          dest: 'public/'
-        }, {
-          cwd: 'app/',
-          expand: true,
           src: ['templates/*'],
           dest: 'public/'
         }, {
           cwd: 'app/',
           expand: true,
-          src: ['res/**/*'],
+          src: ['res/**/*', '!*.{png,jpg,gif}'],
           dest: 'public/'
         }]
       }
@@ -49,6 +44,16 @@ module.exports = function(grunt) {
           args: ['dist'],
           background: false
         }
+      }
+    },
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: 'app/',
+          src: 'res/img/**/*.{png,jpg,gif}',
+          dest: 'public/'
+        }]
       }
     },
     includeHTMLPartials: {
@@ -203,6 +208,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-express-server');
@@ -216,6 +222,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['no-default']);
   grunt.registerTask('dev', ['express:dev', 'sass:dev', 'jshint', 'includeSource:dev', 'wiredep:dev', 'includeHTMLPartials:dev', 'watch']);
-  grunt.registerTask('dist', ['clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist']);
+  grunt.registerTask('dist', ['clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist', 'imagemin:dist']);
   grunt.registerTask('dist-serve', ['express:dist']);
 };

@@ -41,6 +41,7 @@ body {
 
 header {
   margin: 0 auto;
+  z-index: 2;
   position: relative;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -52,6 +53,9 @@ header {
     margin-top: 50px;
     max-height: 100px;
     max-width: 100px; }
+
+.tiny-space {
+  position: absolute; }
 
 * {
   font-family: 'Oswald', sans-serif;
@@ -123,5 +127,15 @@ header {
   header.show {
     color: white;
     visibility: visible; }
+
+.tiny-space {
+  opacity: 0;
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -ms-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease; }
+  .tiny-space.show {
+    opacity: 1; }
 
 /*# sourceMappingURL=main.css.map */

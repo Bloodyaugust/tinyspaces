@@ -27,6 +27,11 @@ module.exports = function(grunt) {
           expand: true,
           src: ['templates/*'],
           dest: 'public/'
+        }, {
+          cwd: 'app/',
+          expand: true,
+          src: ['res/**/*'],
+          dest: 'public/'
         }]
       }
     },

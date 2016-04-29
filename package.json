@@ -4,7 +4,7 @@
   "description": "Code for the tinyspaces site.",
   "main": "index.js",
   "scripts": {
-    "start": "grunt dist && grunt dist-serve",
+    "start": "grunt dist && node index.js dist",
     "postinstall": "bower install"
   },
   "repository": {

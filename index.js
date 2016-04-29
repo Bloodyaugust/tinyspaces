@@ -24,7 +24,7 @@ if (distMode) {
 app.use('/bower_components', express.static('bower_components'));
 
 app.get('/spaces', function (req, res) {
-  res.send(JSON.stringify(tinySpaces));
+  res.send(tinySpaces);
 });
 
 app.listen(port, function () {
@@ -43,6 +43,8 @@ fetch('https://api.imgur.com/3/album/cgr9l', {
   for (var i = 0; i < json.data.images.length; i++) {
     tinySpaces.push(json.data.images[i].link);
   }
+
+  tinySpaces = JSON.stringify(tinySpaces);
 });
 
 if (distMode) {
@@ -59,6 +61,8 @@ if (distMode) {
       for (var i = 0; i < json.data.images.length; i++) {
         tinySpaces.push(json.data.images[i].link);
       }
+
+      tinySpaces = JSON.stringify(tinySpaces);
     });
   }, 1000 * 86400);
 }

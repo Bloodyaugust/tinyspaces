@@ -1,6 +1,9 @@
 var compression = require('compression');
 var express = require('express');
 var fetch = require('node-fetch');
+var mongoclient = require('mongodb').MongoClient;
+var assert = require('assert');
+
 var app = express();
 
 var distMode = (process.argv[2] === 'dist');
@@ -27,6 +30,12 @@ app.use('/bower_components', express.static('bower_components'));
 
 app.get('/spaces', function (req, res) {
   res.send(tinySpaces);
+});
+
+mongoclient.connect(process.env.DB_URL, function(err, db) {
+  assert.equal(null, err);
+  console.log("Connected correctly to server.");
+  db.close();
 });
 
 app.listen(port, function () {

@@ -47,6 +47,8 @@ $(function () {
 
       $('header').addClass('show');
 
+      setView('landing');
+
       if (window.innerWidth < 600) {
         numImagesColumn = 2;
         numImagesRow = 4;
@@ -72,3 +74,7 @@ $(function () {
     }, 1000);
   }, 500);
 });
+
+function setView(view) {
+  $('.content').html($('script[id="templates/' + view + '.html"]').html());
+}

@@ -9,10 +9,25 @@ body {
   text-align: center;
   width: 100vw;
 }
+footer {
+  height: 2vh;
+  left: calc(50% - 10vw);
+  position: absolute;
+  text-align: center;
+  top: 98vh;
+  width: 20vw;
+  z-index: 2;
+
+  .admin {
+    cursor: pointer;
+    margin-left: 10px;
+    text-decoration: underline;
+  }
+}
 header {
   margin: 0 auto;
+  position: relative;
   z-index: 2;
-  @include vertical-align;
 
   h1 {
     margin-bottom: 20px;
@@ -24,6 +39,21 @@ header {
   }
 }
 
+section.content {
+  position: relative;
+  z-index: 2;
+}
+
+.button-wrapper {
+  width: 336px;
+  margin: 10px auto;
+}
+.nav-button {
+  float: left;
+  margin-left: 10px;
+  width: 150px
+}
 .tiny-space {
   position: absolute;
+  z-index: 1;
 }

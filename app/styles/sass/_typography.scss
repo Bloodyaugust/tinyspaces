@@ -21,3 +21,7 @@ h5 {
 h6 {
   @include font-size(12px);
 }
+
+.nav-button {
+  @include font-size(22px);
+}

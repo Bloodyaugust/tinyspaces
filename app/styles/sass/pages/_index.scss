@@ -26,6 +26,9 @@ header {
   }
 }
 
+.nav-button {
+  @include button(#283593);
+}
 .tiny-space {
   opacity: 0;
   -webkit-backface-visibility: hidden;

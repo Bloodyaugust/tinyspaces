@@ -39,14 +39,23 @@ body {
   text-align: center;
   width: 100vw; }
 
+footer {
+  height: 2vh;
+  left: calc(50% - 10vw);
+  position: absolute;
+  text-align: center;
+  top: 98vh;
+  width: 20vw;
+  z-index: 2; }
+  footer .admin {
+    cursor: pointer;
+    margin-left: 10px;
+    text-decoration: underline; }
+
 header {
   margin: 0 auto;
-  z-index: 2;
   position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%); }
+  z-index: 2; }
   header h1 {
     margin-bottom: 20px; }
   header img {
@@ -54,8 +63,22 @@ header {
     max-height: 100px;
     max-width: 100px; }
 
+section.content {
+  position: relative;
+  z-index: 2; }
+
+.button-wrapper {
+  width: 336px;
+  margin: 10px auto; }
+
+.nav-button {
+  float: left;
+  margin-left: 10px;
+  width: 150px; }
+
 .tiny-space {
-  position: absolute; }
+  position: absolute;
+  z-index: 1; }
 
 * {
   font-family: 'Oswald', sans-serif;
@@ -85,6 +108,10 @@ h5 {
 h6 {
   font-size: 12px;
   font-size: 0.75rem; }
+
+.nav-button {
+  font-size: 22px;
+  font-size: 1.375rem; }
 
 .invalid {
   color: red; }
@@ -127,6 +154,27 @@ header {
   header.show {
     color: white;
     visibility: visible; }
+
+.nav-button {
+  background-color: #283593;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  line-height: 2;
+  min-width: 100px;
+  padding: 4px;
+  text-align: center;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  .nav-button:hover {
+    background-color: #3343bb; }
+  .nav-button:active {
+    background-color: #1d276b; }
 
 .tiny-space {
   opacity: 0;

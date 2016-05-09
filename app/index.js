@@ -14,7 +14,7 @@ $(function () {
           img.removeClass('show');
 
           setTimeout(function () {
-            img.attr('src', images[Math.floor(Math.random() * images.length)]);
+            img.attr('src', images[Math.floor(Math.random() * images.length)].url);
           }, 1000);
 
           rotateImage(img);
@@ -31,12 +31,12 @@ $(function () {
     }
   };
 
-  fetch('/spaces')
+  fetch('/images')
   .then(function (resp) {
     return resp.json();
   })
   .then(function (json) {
-    images = json;
+    images = json.images;
   });
 
   setTimeout(function () {
@@ -60,7 +60,7 @@ $(function () {
       maxImages = numImagesRow * numImagesColumn;
 
       for (var i = 0; i < images.length && i < maxImages; i++) {
-        newImg = $('<img class="tiny-space" src="' + images[i] + '">').appendTo('body');
+        newImg = $('<img class="tiny-space" src="' + images[i].url + '">').appendTo('body');
 
         imageElements.push(newImg);
 
@@ -75,6 +75,39 @@ $(function () {
   }, 500);
 });
 
-function setView(view) {
-  $('.content').html($('script[id="templates/' + view + '.html"]').html());
+viewCallbacks = {
+  gallery: function () {
+    $('.gallery-item img').click(function (e) {
+      $(e.target).toggleClass('expanded');
+    });
+  },
+  landing: function () {
+    $('.nav-button[data-template="gallery"]').click(function () {
+      fetch('/spaces')
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (json) {
+        console.log(json);
+        setView('gallery', json);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    });
+  }
+};
+
+function setView(view, data) {
+  var $content = $('.content');
+
+  $content.removeClass('show');
+  setTimeout(function () {
+    $content.addClass('show');
+    $content.html(Mustache.render($('script[id="templates/' + view + '.html"]').html(), data));
+
+    if (viewCallbacks[view]) {
+      viewCallbacks[view]();
+    }
+  }, 500);
 }

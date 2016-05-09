@@ -42,11 +42,16 @@ body {
 footer {
   height: 2vh;
   left: calc(50% - 10vw);
-  position: absolute;
+  position: fixed;
   text-align: center;
   top: 98vh;
   width: 20vw;
   z-index: 2; }
+  @media (max-width: 767px) {
+    footer {
+      left: 0;
+      top: 98vh;
+      width: 100vw; } }
   footer .admin {
     cursor: pointer;
     margin-left: 10px;
@@ -71,13 +76,63 @@ section.content {
   width: 336px;
   margin: 10px auto; }
 
+.gallery {
+  margin: 0 auto;
+  width: 80vw; }
+  @media (max-width: 767px) {
+    .gallery {
+      width: 100vw; } }
+  .gallery .gallery-item {
+    float: left;
+    height: 300px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    width: calc(25% - 64px); }
+    @media (max-width: 767px) {
+      .gallery .gallery-item {
+        width: calc(100% - 84px); } }
+    .gallery .gallery-item img {
+      height: 70%;
+      margin-top: 20px;
+      width: 70%;
+      -webkit-transition: height 0.1s ease;
+      -moz-transition: height 0.1s ease;
+      -ms-transition: height 0.1s ease;
+      -o-transition: height 0.1s ease;
+      transition: height 0.1s ease;
+      -webkit-transition: left 0.1s ease;
+      -moz-transition: left 0.1s ease;
+      -ms-transition: left 0.1s ease;
+      -o-transition: left 0.1s ease;
+      transition: left 0.1s ease;
+      -webkit-transition: top 0.1s ease;
+      -moz-transition: top 0.1s ease;
+      -ms-transition: top 0.1s ease;
+      -o-transition: top 0.1s ease;
+      transition: top 0.1s ease;
+      -webkit-transition: width 0.1s ease;
+      -moz-transition: width 0.1s ease;
+      -ms-transition: width 0.1s ease;
+      -o-transition: width 0.1s ease;
+      transition: width 0.1s ease; }
+      .gallery .gallery-item img.expanded {
+        height: 90vh;
+        left: 5vw;
+        position: fixed;
+        top: 5vh;
+        width: 90vw; }
+    .gallery .gallery-item .order {
+      margin-top: 20px; }
+
 .nav-button {
   float: left;
   margin-left: 10px;
   width: 150px; }
 
 .tiny-space {
-  position: absolute;
+  position: fixed;
   z-index: 1; }
 
 * {
@@ -112,6 +167,14 @@ h6 {
 .nav-button {
   font-size: 22px;
   font-size: 1.375rem; }
+
+.gallery-item .name {
+  font-size: 22px;
+  font-size: 1.375rem; }
+
+.gallery-item .order {
+  font-size: 18px;
+  font-size: 1.125rem; }
 
 .invalid {
   color: red; }
@@ -154,6 +217,43 @@ header {
   header.show {
     color: white;
     visibility: visible; }
+
+.content {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease;
+  -moz-transition: opacity 0.5s ease;
+  -ms-transition: opacity 0.5s ease;
+  -o-transition: opacity 0.5s ease;
+  transition: opacity 0.5s ease; }
+  .content.show {
+    opacity: 1; }
+
+.gallery-item {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid white;
+  border-radius: 4px; }
+  .gallery-item img {
+    cursor: pointer; }
+  .gallery-item .order {
+    background-color: #283593;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    line-height: 2;
+    min-width: 100px;
+    padding: 4px;
+    text-align: center;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    .gallery-item .order:hover {
+      background-color: #3343bb; }
+    .gallery-item .order:active {
+      background-color: #1d276b; }
 
 .nav-button {
   background-color: #283593;

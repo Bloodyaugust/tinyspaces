@@ -26,6 +26,27 @@ header {
   }
 }
 
+.content {
+  opacity: 0;
+  @include transition(opacity .5s ease);
+
+  &.show {
+    opacity: 1;
+  }
+}
+.gallery-item {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid white;
+  border-radius: 4px;
+
+  img {
+    cursor: pointer;
+  }
+
+  .order {
+    @include button(#283593);
+  }
+}
 .nav-button {
   @include button(#283593);
 }

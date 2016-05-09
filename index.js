@@ -48,7 +48,25 @@ if (distMode) {
 app.use('/bower_components', express.static('bower_components'));
 
 app.get('/spaces', function (req, res) {
-  res.send(tinySpaces);
+  var start = parseInt(req.query.start) || 0,
+    limit = parseInt(req.query.limit) || 10,
+    cursor;
+
+  cursor = dbConnection.collection('spaces').find().skip(start).limit(limit);
+
+  cursor.toArray(function (err, result) {
+    if (err) {
+      res.json({
+        code: 500,
+        message: 'Error retrieving spaces'
+      });
+    } else {
+      res.json({
+        code: 200,
+        spaces: result
+      });
+    }
+  });
 });
 app.post('/spaces', function (req, res) {
   dbConnection.collection('spaces').save(req.body, function (err, result) {

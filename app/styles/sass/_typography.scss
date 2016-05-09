@@ -25,3 +25,11 @@ h6 {
 .nav-button {
   @include font-size(22px);
 }
+.gallery-item {
+  .name {
+    @include font-size(22px);
+  }
+  .order {
+    @include font-size(18px);
+  }
+}

@@ -88,7 +88,6 @@ viewCallbacks = {
         return res.json();
       })
       .then(function (json) {
-        console.log(json);
         setView('gallery', json);
       })
       .catch(function (error) {

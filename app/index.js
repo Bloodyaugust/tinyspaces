@@ -7,6 +7,14 @@ $(function () {
     imgWidth,
     maxImages;
 
+    var test1 = 'testsad';
+    var test2 = 'testsadsdfar';
+    var mismatch = 0;
+    for (var i = 0; i < test2.length; ++i) {
+      mismatch |= (test1.charCodeAt(i) ^ test2.charCodeAt(i));
+    }
+    console.log(mismatch);
+
   var rotateImage = function (imageElement) {
     if (imageElement.hasClass('show')) {
       (function (img) {

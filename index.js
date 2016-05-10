@@ -128,6 +128,30 @@ app.post('/images/upload', multer().single('space'), function (req, res) {
     }
   });
 });
+app.post('/login', function (req, res) {
+  var cursor = dbConnection.collection('admin').find(),
+    mismatch, admin;
+
+  cursor.toArray(function (err, result) {
+    if (err) {
+      res.json({
+        code: 500,
+        message: 'Error retrieving admin data'
+      });
+    } else {
+      admin = result[0];
+
+      mismatch = 0;
+      for (var i = 0; i < req.body.password.length; ++i) {
+        mismatch |= (req.body.password.charCodeAt(i) ^ admin.password.charCodeAt(i));
+      }
+
+      if (!mismatch) {
+
+      }
+    }
+  })
+})
 
 app.listen(port, function () {
   console.log('Listening on port ' + port + ' in ' + (distMode ? 'dist' : 'dev') + ' mode');

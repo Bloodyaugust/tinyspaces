@@ -276,6 +276,39 @@ header {
   .nav-button:active {
     background-color: #1d276b; }
 
+.order input {
+  width: 100%; }
+
+.order .input-wrapper {
+  margin: 20px auto;
+  max-width: 200px; }
+
+.order .submit {
+  margin: 20px auto;
+  max-width: 200px;
+  background-color: #283593;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  line-height: 2;
+  min-width: 100px;
+  padding: 4px;
+  text-align: center;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  .order .submit:hover {
+    background-color: #3343bb; }
+  .order .submit:active {
+    background-color: #1d276b; }
+
+.success h2 {
+  margin: 20px auto; }
+
 .tiny-space {
   opacity: 0;
   -webkit-backface-visibility: hidden;

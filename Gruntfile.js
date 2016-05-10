@@ -259,6 +259,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['no-default']);
   grunt.registerTask('dev', ['express:dev', 'sass:dev', 'jshint', 'includeSource:dev', 'wiredep:dev', 'includeHTMLPartials:dev', 'watch']);
-  grunt.registerTask('dist', ['clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist', 'includeHTMLPartials:dev', 'imagemin:dist', 'uglify:dist', 'cssmin:dist']);
+  grunt.registerTask('dist', ['clean', 'sass:dist', 'concat:dist', 'copy:dist', 'includeSource:dist', 'wiredep:dist', 'includeHTMLPartials:dist', 'imagemin:dist', 'uglify:dist', 'cssmin:dist']);
   grunt.registerTask('dist-serve', ['express:dist']);
 };

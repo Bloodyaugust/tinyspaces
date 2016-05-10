@@ -50,6 +50,26 @@ header {
 .nav-button {
   @include button(#283593);
 }
+.order {
+  input {
+    width: 100%;
+  }
+
+  .input-wrapper {
+    margin: 20px auto;
+    max-width: 200px;
+  }
+  .submit {
+    margin: 20px auto;
+    max-width: 200px;
+    @include button(#283593);
+  }
+}
+.success {
+  h2 {
+    margin: 20px auto;
+  }
+}
 .tiny-space {
   opacity: 0;
   -webkit-backface-visibility: hidden;

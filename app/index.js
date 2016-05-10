@@ -7,6 +7,8 @@ $(function () {
     imgWidth,
     maxImages;
 
+  window.user = {};
+
   var rotateImage = function (imageElement) {
     if (imageElement.hasClass('show')) {
       (function (img) {
@@ -80,6 +82,12 @@ viewCallbacks = {
     $('.gallery-item img').click(function (e) {
       $(e.target).toggleClass('expanded');
     });
+
+    $('.order').click(function (e) {
+      setView('order', {
+        _id: $(e.target).data().id
+      });
+    });
   },
   landing: function () {
     $('.nav-button[data-template="gallery"]').click(function () {
@@ -94,11 +102,71 @@ viewCallbacks = {
         console.log(error);
       });
     });
+  },
+  login: function () {
+    $('.status').html('');
+
+    $('.submit').click(function () {
+      fetch('/login', {
+        method: 'post',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          password: $('input[data-type="password"]')
+        })
+      })
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (json) {
+        if (json.code === 200) {
+          user = {
+            token: json.token
+          };
+
+          setView('admin', {});
+        } else {
+          $('.status').html(json.message);
+        }
+      });
+    });
+  },
+  order: function () {
+    $('.status').html('');
+
+    $('.submit').click(function () {
+      fetch('/buy', {
+        method: 'post',
+        body: JSON.stringify({
+          name: $('input[data-type="name"]').val(),
+          address: $('input[data-type="address"]').val(),
+          email: $('input[data-type="email"]').val(),
+          date: new Date(),
+          spaceID: $('.submit').data().spaceId
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (json) {
+        if (json.code === 200) {
+          setView('success', {});
+        } else {
+          $('.status').html(json.message);
+        }
+      });
+    });
   }
 };
 
 function setView(view, data) {
   var $content = $('.content');
+
+  data.user = user;
 
   $content.removeClass('show');
   setTimeout(function () {

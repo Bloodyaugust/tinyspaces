@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var cloudinary = require('cloudinary');
 var datauri = require('datauri');
+var bcrypt = require('bcrypt');
+var hat = require('hat');
 
 var app = express();
 
@@ -22,6 +24,35 @@ var allowCrossDomain = function(req, res, next) {
 
   next();
 }
+var authProtected = function (req, res, next) {
+  var cursor = dbConnection.collection('admin').find();
+
+  cursor.toArray(function (err, result) {
+    if (err) {
+      res.json({
+        code: 500,
+        message: 'Error retrieving admin data'
+      });
+    } else {
+      console.log(new Date(result[0].tokenExpires));
+      if (new Date().getTime() < new Date(result[0].tokenExpires).getTime()) {
+        if (req.body.token === result[0].token) {
+          next();
+        } else {
+          res.json({
+            code: 401,
+            message: 'Incorrect token, please login again'
+          });
+        }
+      } else {
+        res.json({
+          code: 401,
+          message: 'Token is expired, please login again'
+        });
+      }
+    }
+  });
+};
 
 var dbConnection;
 mongoclient.connect(process.env.DB_URL, function(err, db) {
@@ -68,7 +99,7 @@ app.get('/spaces', function (req, res) {
     }
   });
 });
-app.post('/spaces', function (req, res) {
+app.post('/spaces', authProtected, function (req, res) {
   dbConnection.collection('spaces').save(req.body, function (err, result) {
     if (err) {
       res.json({
@@ -104,7 +135,7 @@ app.get('/images', function (req, res) {
     }
   });
 });
-app.post('/images/upload', multer().single('space'), function (req, res) {
+app.post('/images/upload', authProtected, multer().single('space'), function (req, res) {
   var base64Image = new datauri();
 
   base64Image.format(req.file.originalname.split('.')[1], req.file.buffer);
@@ -130,7 +161,7 @@ app.post('/images/upload', multer().single('space'), function (req, res) {
 });
 app.post('/login', function (req, res) {
   var cursor = dbConnection.collection('admin').find(),
-    mismatch, admin;
+    mismatch, admin, newToken;
 
   cursor.toArray(function (err, result) {
     if (err) {
@@ -139,19 +170,26 @@ app.post('/login', function (req, res) {
         message: 'Error retrieving admin data'
       });
     } else {
-      admin = result[0];
+      if (bcrypt.compareSync(req.body.password, result[0].password)) {
+        newToken = hat();
 
-      mismatch = 0;
-      for (var i = 0; i < req.body.password.length; ++i) {
-        mismatch |= (req.body.password.charCodeAt(i) ^ admin.password.charCodeAt(i));
-      }
+        result[0].token = newToken;
+        result[0].tokenExpires = new Date().getTime() + (60 * 60 * 1000); //one day
+        dbConnection.collection('admin').save(result[0]);
 
-      if (!mismatch) {
-
+        res.json({
+          code: 200,
+          token: newToken
+        });
+      } else {
+        res.json({
+          code: 401,
+          message: 'Error in password'
+        });
       }
     }
-  })
-})
+  });
+});
 
 app.listen(port, function () {
   console.log('Listening on port ' + port + ' in ' + (distMode ? 'dist' : 'dev') + ' mode');

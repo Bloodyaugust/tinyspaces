@@ -1,10 +1,12 @@
 $(function () {
   var numImagesColumn = 5,
     numImagesRow = 4,
+    nearBottom = false,
     images = [],
     imageElements = [],
     imgHeight,
     imgWidth,
+    spacesStart = 0,
     maxImages;
 
   window.user = {};
@@ -76,6 +78,27 @@ $(function () {
 
       $('.admin').click(function (e) {
         setView('login', {});
+      });
+      $(window).scroll(function() {
+         if($(window).scrollTop() + $(window).height() > $(document).height() - 200 && !nearBottom) {
+           nearBottom = true;
+           spacesStart += 10;
+
+           fetch('/spaces?start=' + spacesStart)
+           .then(function (res) {
+             return res.json();
+           })
+           .then(function (json) {
+             $('.gallery').append(Mustache.render($('script[id="templates/gallery-items.html"]').html(), json));
+           })
+           .catch(function (error) {
+             console.log(error);
+           });
+         } else {
+           if ($(window).scrollTop() + $(window).height() < $(document).height() - 200) {
+             nearBottom = false;
+           }
+         }
       });
     }, 1000);
   }, 500);

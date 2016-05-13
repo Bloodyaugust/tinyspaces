@@ -1,0 +1,9 @@
+{{#spaces}}
+<div class="gallery-item" data-id="{{_id}}">
+  <div class="name">{{name}}</div>
+  <img src="{{url}}" alt="{{name}}">
+  {{^sold}}
+  <div class="order" data-id="{{_id}}">Buy Me!</div>
+  {{/sold}}
+</div>
+{{/spaces}}

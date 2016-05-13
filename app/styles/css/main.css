@@ -72,6 +72,17 @@ section.content {
   position: relative;
   z-index: 2; }
 
+.admin > * {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 300px; }
+
+.admin input {
+  width: 100%; }
+
+.admin .input-heading {
+  margin: 10px 0; }
+
 .button-wrapper {
   width: 336px;
   margin: 10px auto; }
@@ -126,6 +137,14 @@ section.content {
     .gallery .gallery-item .order {
       margin-top: 20px; }
 
+.login div {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 300px; }
+
+.login input {
+  width: 100%; }
+
 .nav-button {
   float: left;
   margin-left: 10px;
@@ -164,6 +183,10 @@ h6 {
   font-size: 12px;
   font-size: 0.75rem; }
 
+.admin .input-heading {
+  font-size: 22px;
+  font-size: 1.375rem; }
+
 .nav-button {
   font-size: 22px;
   font-size: 1.375rem; }
@@ -175,6 +198,10 @@ h6 {
 .gallery-item .order {
   font-size: 18px;
   font-size: 1.125rem; }
+
+.login div {
+  font-size: 22px;
+  font-size: 1.375rem; }
 
 .invalid {
   color: red; }
@@ -218,6 +245,27 @@ header {
     color: white;
     visibility: visible; }
 
+.admin .submit {
+  background-color: #283593;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  line-height: 2;
+  min-width: 100px;
+  padding: 4px;
+  text-align: center;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  .admin .submit:hover {
+    background-color: #3343bb; }
+  .admin .submit:active {
+    background-color: #1d276b; }
+
 .content {
   opacity: 0;
   -webkit-transition: opacity 0.5s ease;
@@ -254,6 +302,27 @@ header {
       background-color: #3343bb; }
     .gallery-item .order:active {
       background-color: #1d276b; }
+
+.login .submit {
+  background-color: #283593;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  line-height: 2;
+  min-width: 100px;
+  padding: 4px;
+  text-align: center;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  .login .submit:hover {
+    background-color: #3343bb; }
+  .login .submit:active {
+    background-color: #1d276b; }
 
 .nav-button {
   background-color: #283593;

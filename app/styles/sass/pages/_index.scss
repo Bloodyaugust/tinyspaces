@@ -26,6 +26,9 @@ header {
   }
 }
 
+.admin .submit {
+  @include button(#283593);
+}
 .content {
   opacity: 0;
   @include transition(opacity .5s ease);
@@ -46,6 +49,9 @@ header {
   .order {
     @include button(#283593);
   }
+}
+.login .submit {
+  @include button(#283593);
 }
 .nav-button {
   @include button(#283593);

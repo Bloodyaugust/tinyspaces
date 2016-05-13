@@ -49,6 +49,20 @@ section.content {
   z-index: 2;
 }
 
+.admin {
+  &>* {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 300px;
+  }
+  input {
+    width: 100%;
+  }
+
+  .input-heading {
+    margin: 10px 0;
+  }
+}
 .button-wrapper {
   width: 336px;
   margin: 10px auto;
@@ -93,6 +107,16 @@ section.content {
     .order {
       margin-top: 20px;
     }
+  }
+}
+.login {
+  div {
+    margin: 20px auto;
+    width: 100%;
+    max-width: 300px;
+  }
+  input {
+    width: 100%;
   }
 }
 .nav-button {

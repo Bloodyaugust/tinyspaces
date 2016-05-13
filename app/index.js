@@ -49,7 +49,7 @@ $(function () {
 
       $('header').addClass('show');
 
-      setView('landing');
+      setView('landing', {});
 
       if (window.innerWidth < 600) {
         numImagesColumn = 2;
@@ -73,11 +73,62 @@ $(function () {
 
         rotateImage(newImg);
       }
+
+      $('.admin').click(function (e) {
+        setView('login', {});
+      });
     }, 1000);
   }, 500);
 });
 
 viewCallbacks = {
+  admin: function () {
+    var formData;
+
+    $('.submit').click(function (e) {
+      formData = new FormData();
+      formData.append('token', user.token);
+      formData.append('space', $('input[type="file"]')[0].files[0]);
+
+      fetch('/images', {
+        method: 'post',
+        body: formData
+      })
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (json) {
+        if (json.code === 200) {
+          fetch('/spaces', {
+            body: JSON.stringify({
+              description: $('input[data-type="description"]').val(),
+              name: $('input[data-type="name"]').val(),
+              sold: $('input[type="checkbox"]').prop('checked'),
+              token: user.token,
+              url: json.url
+            }),
+            headers: {
+              "Content-Type": "application/json"
+            },
+            method: 'post'
+          })
+          .then(function (resp2) {
+            return resp2.json();
+          })
+          .then(function (json2) {
+            if (json2.code === 200) {
+              $('input[data-type="description"]').val('');
+              $('input[data-type="name"]').val('');
+              $('input[type="checkbox"]').prop('checked', false);
+            }
+            $('.status').html(json2.message);
+          });
+        } else {
+          $('.status').html(json.message);
+        }
+      });
+    });
+  },
   gallery: function () {
     $('.gallery-item img').click(function (e) {
       $(e.target).toggleClass('expanded');
@@ -113,7 +164,7 @@ viewCallbacks = {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          password: $('input[data-type="password"]')
+          password: $('input[data-type="password"]').val()
         })
       })
       .then(function (resp) {

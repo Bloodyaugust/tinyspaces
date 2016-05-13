@@ -30,30 +30,37 @@ var allowCrossDomain = function(req, res, next) {
 var authProtected = function (req, res, next) {
   var cursor = dbConnection.collection('admin').find();
 
-  cursor.toArray(function (err, result) {
-    if (err) {
-      res.json({
-        code: 500,
-        message: 'Error retrieving admin data'
-      });
-    } else {
-      if (new Date().getTime() < new Date(result[0].tokenExpires).getTime()) {
-        if (req.body.token === result[0].token) {
-          next();
+  if (req.body.token) {
+    cursor.toArray(function (err, result) {
+      if (err) {
+        res.json({
+          code: 500,
+          message: 'Error retrieving admin data'
+        });
+      } else {
+        if (new Date().getTime() < new Date(result[0].tokenExpires).getTime()) {
+          if (req.body.token === result[0].token) {
+            next();
+          } else {
+            res.json({
+              code: 401,
+              message: 'Incorrect token, please login again'
+            });
+          }
         } else {
           res.json({
             code: 401,
-            message: 'Incorrect token, please login again'
+            message: 'Token is expired, please login again'
           });
         }
-      } else {
-        res.json({
-          code: 401,
-          message: 'Token is expired, please login again'
-        });
       }
-    }
-  });
+    });
+  } else {
+    res.json({
+      code: 401,
+      message: 'Token is required'
+    });
+  }
 };
 
 var dbConnection;
@@ -188,7 +195,7 @@ app.get('/images', function (req, res) {
     }
   });
 });
-app.post('/images/upload', authProtected, multer().single('space'), function (req, res) {
+app.post('/images', multer().single('space'), authProtected, function (req, res) {
   var base64Image = new datauri();
 
   base64Image.format(req.file.originalname.split('.')[1], req.file.buffer);
@@ -202,7 +209,8 @@ app.post('/images/upload', authProtected, multer().single('space'), function (re
 
       res.json({
         code: 200,
-        message: 'Image upload successful'
+        message: 'Image upload successful',
+        url: result.secure_url
       });
     } else {
       res.json({

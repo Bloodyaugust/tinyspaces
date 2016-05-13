@@ -22,6 +22,11 @@ h6 {
   @include font-size(12px);
 }
 
+.admin {
+  .input-heading {
+    @include font-size(22px);
+  }
+}
 .nav-button {
   @include font-size(22px);
 }
@@ -32,4 +37,7 @@ h6 {
   .order {
     @include font-size(18px);
   }
+}
+.login div {
+  @include font-size(22px);
 }

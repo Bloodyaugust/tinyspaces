@@ -76,7 +76,6 @@ section.content {
 
   .gallery-item {
     float: left;
-    height: 300px;
     margin-bottom: 20px;
     margin-left: 20px;
     margin-top: 20px;
@@ -87,23 +86,14 @@ section.content {
     }
 
     img {
-      height: 70%;
+      height: auto;
       margin-top: 20px;
-      width: 70%;
-      @include transition(height .1s ease);
-      @include transition(left .1s ease);
-      @include transition(top .1s ease);
-      @include transition(width .1s ease);
-
-      &.expanded {
-        height: 90vh;
-        left: 5vw;
-        position: fixed;
-        top: 5vh;
-        width: 90vw;
-      }
+      width: 100%;
     }
 
+    .description {
+      margin-top: 20px;
+    }
     .order {
       margin-top: 20px;
     }

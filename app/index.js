@@ -153,10 +153,6 @@ viewCallbacks = {
     });
   },
   gallery: function () {
-    $('.gallery-item img').click(function (e) {
-      $(e.target).toggleClass('expanded');
-    });
-
     $('.order').click(function (e) {
       setView('order', {
         _id: $(e.target).data().id
@@ -175,6 +171,10 @@ viewCallbacks = {
       .catch(function (error) {
         console.log(error);
       });
+    });
+
+    $('.nav-button[data-template="request"]').click(function () {
+      setView('request', {});
     });
   },
   login: function () {
@@ -233,6 +233,64 @@ viewCallbacks = {
           $('.status').html(json.message);
         }
       });
+    });
+  },
+  request: function () {
+    $('.submit').click(function () {
+      fetch('/request', {
+        method: 'post',
+        body: JSON.stringify({
+          name: $('input[data-type="name"]').val(),
+          address: $('input[data-type="address"]').val(),
+          email: $('input[data-type="email"]').val(),
+          description: $('textarea').val()
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(function (resp) {
+        return resp.json();
+      })
+      .then(function (json) {
+        if (json.code === 200) {
+          setView('request-success', {});
+        } else {
+          $('.status').html(json.message);
+        }
+      });
+    });
+  },
+  "request-success": function () {
+    $('.nav-button[data-template="gallery"]').click(function () {
+      fetch('/spaces')
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (json) {
+        setView('gallery', json);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    });
+  },
+  success: function () {
+    $('.nav-button[data-template="gallery"]').click(function () {
+      fetch('/spaces')
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (json) {
+        setView('gallery', json);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    });
+
+    $('.nav-button[data-template="request"]').click(function () {
+      setView('request', {});
     });
   }
 };

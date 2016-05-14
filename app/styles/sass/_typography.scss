@@ -31,6 +31,9 @@ h6 {
   @include font-size(22px);
 }
 .gallery-item {
+  .description {
+    @include font-size(18px);
+  }
   .name {
     @include font-size(22px);
   }

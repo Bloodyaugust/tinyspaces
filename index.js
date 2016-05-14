@@ -89,7 +89,7 @@ app.use('/bower_components', express.static('bower_components'));
 
 app.post('/buy', function (req, res) {
   var message = 'Customer: {{name}}\r\nTinySpace: {{{url}}}\r\nAddress: {{address}}\r\nEmail: {{email}}\r\nOrdered: {{date}}',
-    cursor;
+  cursor;
 
   cursor = dbConnection.collection('spaces').find({_id: new mongoObjectId(req.body.spaceID)});
 
@@ -134,6 +134,29 @@ app.post('/buy', function (req, res) {
             }
           });
         }
+      });
+    }
+  });
+});
+app.post('/request', function (req, res) {
+  var message = 'Customer: {{name}}\r\nAddress: {{address}}\r\nEmail: {{email}}\r\nOrdered: {{date}}\r\nDetails:\r\n{{description}}';
+
+  req.body.date = new Date();
+  mailgun.messages().send({
+    from: 'TinySpaces Ordering <mailgun@mg.synsugarstudio.com>',
+    to: 'greysonrichey@gmail.com',
+    subject: 'New Tiny Space Custom Order',
+    text: mustache.render(message, req.body)
+  }, function (error, body) {
+    if (error) {
+      res.json({
+        code: 500,
+        message: 'There was an error placing your order, try again later'
+      });
+    } else {
+      res.json({
+        code: 200,
+        message: 'Order placed successfully'
       });
     }
   });

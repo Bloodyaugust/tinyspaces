@@ -95,7 +95,6 @@ section.content {
       width: 100vw; } }
   .gallery .gallery-item {
     float: left;
-    height: 300px;
     margin-bottom: 20px;
     margin-left: 20px;
     margin-top: 20px;
@@ -105,35 +104,11 @@ section.content {
       .gallery .gallery-item {
         width: calc(100% - 84px); } }
     .gallery .gallery-item img {
-      height: 70%;
+      height: auto;
       margin-top: 20px;
-      width: 70%;
-      -webkit-transition: height 0.1s ease;
-      -moz-transition: height 0.1s ease;
-      -ms-transition: height 0.1s ease;
-      -o-transition: height 0.1s ease;
-      transition: height 0.1s ease;
-      -webkit-transition: left 0.1s ease;
-      -moz-transition: left 0.1s ease;
-      -ms-transition: left 0.1s ease;
-      -o-transition: left 0.1s ease;
-      transition: left 0.1s ease;
-      -webkit-transition: top 0.1s ease;
-      -moz-transition: top 0.1s ease;
-      -ms-transition: top 0.1s ease;
-      -o-transition: top 0.1s ease;
-      transition: top 0.1s ease;
-      -webkit-transition: width 0.1s ease;
-      -moz-transition: width 0.1s ease;
-      -ms-transition: width 0.1s ease;
-      -o-transition: width 0.1s ease;
-      transition: width 0.1s ease; }
-      .gallery .gallery-item img.expanded {
-        height: 90vh;
-        left: 5vw;
-        position: fixed;
-        top: 5vh;
-        width: 90vw; }
+      width: 100%; }
+    .gallery .gallery-item .description {
+      margin-top: 20px; }
     .gallery .gallery-item .order {
       margin-top: 20px; }
 
@@ -190,6 +165,10 @@ h6 {
 .nav-button {
   font-size: 22px;
   font-size: 1.375rem; }
+
+.gallery-item .description {
+  font-size: 18px;
+  font-size: 1.125rem; }
 
 .gallery-item .name {
   font-size: 22px;
@@ -280,8 +259,6 @@ header {
   background-color: rgba(0, 0, 0, 0.8);
   border: 2px solid white;
   border-radius: 4px; }
-  .gallery-item img {
-    cursor: pointer; }
   .gallery-item .order {
     background-color: #283593;
     border-radius: 4px;
@@ -346,6 +323,12 @@ header {
     background-color: #1d276b; }
 
 .order input {
+  width: 100%; }
+
+.order textarea {
+  height: 300px;
+  margin-top: 20px;
+  resize: none;
   width: 100%; }
 
 .order .input-wrapper {
